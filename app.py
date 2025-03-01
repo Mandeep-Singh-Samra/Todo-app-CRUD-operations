@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime   # Import datetime module to get the current date and time
 
@@ -31,13 +31,32 @@ def hellp_world():
         db.session.commit()
         
     aLLTodo=Todo.query.all()
-    return render_template('index.html',aLLTodo=aLLTodo)
+    return render_template('index.html', aLLTodo=aLLTodo)
 
-@app.route('/show')
-def products():
-    aLLtodo=Todo.query.all()
-    print(aLLtodo)
-    return 'Hello, World!'
+
+@app.route('/update/<int:sno>' , methods=['GET','POST'])
+def update(sno):
+     if request.method=='POST':
+         title=request.form['title'] 
+         desc=request.form['desc']
+         todo = Todo.query.filter_by(sno=sno).first()
+         todo.title=title
+         todo.desc=desc
+         db.session.add(todo)
+         db.session.commit()
+         return redirect('/')
+     todo = Todo.query.filter_by(sno=sno).first()
+     return render_template('update.html', todo=todo)
+
+
+@app.route('/delete/<int:sno>')
+def delete(sno):
+    todo = Todo.query.filter_by(sno=sno).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return render_template('update.html', todo=todo)
+    return redirect('/')
+       
 
 
 # Create Database and Tables
@@ -48,3 +67,4 @@ with app.app_context():
 # Run the app
 if __name__ == '__main__':
     app.run(debug=True)
+   
