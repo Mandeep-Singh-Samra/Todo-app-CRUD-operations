@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} About {% endblock title %}
+
+{% block body %}
+<div class="container mt-5 text-center">
+    <h2 class="mb-3">About This To-Do App</h2>
+    <p class="lead">This is a simple task management app built with Flask and Bootstrap.</p>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title">Features:</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">✔ Add, Edit, and Delete Tasks</li>
+                        <li class="list-group-item">✔ Track Tasks with a Timestamp</li>
+                        <li class="list-group-item">✔ Responsive and User-Friendly UI</li>
+                        <li class="list-group-item">✔ Built with Flask, Bootstrap, and SQLite</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('hello_world') }}" class="btn btn-primary mt-4">Back to Home</a>
+</div>
+{% endblock body %}

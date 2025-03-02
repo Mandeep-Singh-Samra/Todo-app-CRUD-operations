@@ -15,14 +15,14 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    desc = db.Column(db.String(500), unique=True, nullable=False)
+    desc = db.Column(db.String(500), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f"{self.sno}{self.title}"
     
 @app.route('/', methods=['GET','POST'])
-def hellp_world():
+def hello_world():
     if request.method=='POST':
         title=request.form['title']
         desc=request.form['desc']
@@ -49,15 +49,21 @@ def update(sno):
      return render_template('update.html', todo=todo)
 
 
+ 
 @app.route('/delete/<int:sno>')
 def delete(sno):
     todo = Todo.query.filter_by(sno=sno).first()
-    db.session.delete(todo)
-    db.session.commit()
-    return render_template('update.html', todo=todo)
+    if todo:
+        db.session.delete(todo)
+        db.session.commit()
     return redirect('/')
-       
 
+
+       
+@app.route('/about')
+def about():
+    return render_template('about.html')
+    
 
 # Create Database and Tables
 with app.app_context():
