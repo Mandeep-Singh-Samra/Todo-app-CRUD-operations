@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: flask-todo-app
+    env: docker
+    region: oregon  # Change this based on your location
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 5000
