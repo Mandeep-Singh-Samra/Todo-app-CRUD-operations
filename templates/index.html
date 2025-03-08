@@ -7,6 +7,7 @@
     <h2 class="my-4 text-center">📝 My To-Do List</h2>
 
     <!-- Add Task Form -->
+    
     <form method="POST" action="/" class="mb-4">
         <div class="row g-2">
             <div class="col-md-5">
@@ -16,7 +17,8 @@
                 <input type="text" name="desc" class="form-control" placeholder="Task Description" required>
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Add Task</button>
+                <button type="submit" class="btn btn-dark w-100">Add Task</button>
+
             </div>
         </div>
     </form>
@@ -30,9 +32,13 @@
                 <th>Description</th>
                 <th>Date Created</th>
                 <th>Actions</th>
+               
+                
+
             </tr>
         </thead>
         <tbody>
+            
             {% for task in aLLTodo %}
             <tr>
                 <td>{{ task.sno }}</td>
@@ -40,8 +46,8 @@
                 <td>{{ task.desc }}</td>
                 <td>{{ task.date_created.strftime('%Y-%m-%d') }}</td>
                 <td>
-                    <a href="/update/{{ task.sno }}" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="/delete/{{ task.sno }}" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="/update/{{ task.sno }}" class="btn btn-sm btn-dark">Edit</a>
+                    <a href="/delete/{{ task.sno }}" class="btn btn-sm btn-dark">Delete</a>
                 </td>
             </tr>
             {% endfor %}
